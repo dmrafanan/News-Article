@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//   ViewController.swift
 //  Personal Project 1
 //
 //  Created by Daniel Marco S. Rafanan on Sep/7/20.
@@ -89,10 +89,7 @@ class NewsViewController: UIViewController, UICollectionViewDelegate, UICollecti
     //MARK: UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 180)
+        return CGSize(width: collectionView.bounds.width, height: 125)
     }
-
-
-
 }
 

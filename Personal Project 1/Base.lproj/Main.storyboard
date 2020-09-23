@@ -62,41 +62,49 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="newsArticleReusableCell" id="Lzz-Kx-9mj" customClass="NewsArticleCollectionViewCell" customModule="Personal_Project_1" customModuleProvider="target">
-                                        <rect key="frame" x="2.5" y="0.0" width="369" height="178"/>
+                                        <rect key="frame" x="2.5" y="0.0" width="369" height="125"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DyU-pz-Mit">
-                                            <rect key="frame" x="0.0" y="0.0" width="369" height="178"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="369" height="125"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9TF-8b-mhz" customClass="CustomImageView" customModule="Personal_Project_1" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="8" width="122" height="162"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9TF-8b-mhz" customClass="CustomImageView" customModule="Personal_Project_1" customModuleProvider="target">
+                                                    <rect key="frame" x="8" y="15" width="106.5" height="95"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="122" id="UDS-7x-zbH"/>
+                                                        <constraint firstAttribute="width" secondItem="9TF-8b-mhz" secondAttribute="height" multiplier="122:109" id="Xo1-ql-vJR"/>
+                                                        <constraint firstAttribute="height" constant="95" id="deK-8G-a7J"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wH9-ed-xCR">
-                                                    <rect key="frame" x="138" y="8" width="231" height="88"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wH9-ed-xCR">
+                                                    <rect key="frame" x="122.5" y="8" width="238.5" height="47"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEh-Ut-KwB">
-                                                    <rect key="frame" x="138" y="91" width="223" height="79"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEh-Ut-KwB">
+                                                    <rect key="frame" x="122.5" y="63" width="238.5" height="54"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="54" id="BnR-bI-dPL"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="9TF-8b-mhz" secondAttribute="bottom" constant="8" id="MDM-nf-qdO"/>
+                                                <constraint firstItem="yEh-Ut-KwB" firstAttribute="top" secondItem="wH9-ed-xCR" secondAttribute="bottom" constant="8" id="J4d-OY-87O"/>
+                                                <constraint firstItem="yEh-Ut-KwB" firstAttribute="leading" secondItem="9TF-8b-mhz" secondAttribute="trailing" constant="8" id="T9l-Sl-GHE"/>
+                                                <constraint firstItem="wH9-ed-xCR" firstAttribute="top" secondItem="DyU-pz-Mit" secondAttribute="top" constant="8" id="UC8-cC-qHM"/>
+                                                <constraint firstAttribute="trailing" secondItem="yEh-Ut-KwB" secondAttribute="trailing" constant="8" id="UI4-Y9-QWj"/>
+                                                <constraint firstItem="9TF-8b-mhz" firstAttribute="centerY" secondItem="DyU-pz-Mit" secondAttribute="centerY" id="WUC-DQ-KlZ"/>
                                                 <constraint firstItem="9TF-8b-mhz" firstAttribute="leading" secondItem="DyU-pz-Mit" secondAttribute="leading" constant="8" id="doi-bQ-3PA"/>
-                                                <constraint firstItem="9TF-8b-mhz" firstAttribute="top" secondItem="DyU-pz-Mit" secondAttribute="top" constant="8" id="vBc-Im-6Iu"/>
+                                                <constraint firstAttribute="bottom" secondItem="yEh-Ut-KwB" secondAttribute="bottom" constant="8" id="h9Q-rz-9TV"/>
+                                                <constraint firstAttribute="trailing" secondItem="wH9-ed-xCR" secondAttribute="trailing" constant="8" id="jL9-wV-mjx"/>
+                                                <constraint firstItem="wH9-ed-xCR" firstAttribute="leading" secondItem="9TF-8b-mhz" secondAttribute="trailing" constant="8" id="lJW-mk-uUL"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="369" height="178"/>
+                                        <size key="customSize" width="369" height="125"/>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="yEh-Ut-KwB" id="pZt-YM-B4L"/>
                                             <outlet property="imageView" destination="9TF-8b-mhz" id="Abs-Nh-fm6"/>
@@ -104,7 +112,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="headerDequeueReusableCell" id="Sf0-Rf-5FC" customClass="HeaderCollectionViewCell" customModule="Personal_Project_1" customModuleProvider="target">
-                                        <rect key="frame" x="123" y="188" width="128" height="128"/>
+                                        <rect key="frame" x="123" y="135" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Yug-Qg-vAP">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -124,7 +132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-655" y="112"/>
+            <point key="canvasLocation" x="-655.07246376811599" y="111.83035714285714"/>
         </scene>
     </scenes>
 </document>
