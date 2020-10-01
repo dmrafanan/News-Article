@@ -2,7 +2,7 @@
 //  NewsArticleCollectionViewCell.swift
 //  Personal Project 1
 //
-//  Created by Daniel Marco S. Rafanan on Sep/10/20.
+//Created by Daniel Marco S. Rafanan on Sep/10/20.
 //  Copyright © 2020 Daniel Marco S. Rafanan. All rights reserved.
 //
 

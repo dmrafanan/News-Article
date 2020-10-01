@@ -8,6 +8,40 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Favorites-->
+        <scene sceneID="Smd-5O-qzA">
+            <objects>
+                <navigationController id="ExR-0p-9qp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorites" id="oIX-CL-Fs1"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EMA-2H-fUA">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="rQH-fF-Vca" kind="relationship" relationship="rootViewController" id="VwV-lt-xAE"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ERG-xz-HEd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1610" y="895"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="3ue-CJ-35R">
+            <objects>
+                <viewController id="rQH-fF-Vca" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="McJ-FQ-0h6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="lfd-CT-PWr"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="ma9-oc-CIN"/>
+                    <navigationItem key="navigationItem" id="WAL-nQ-4B6"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jrg-Ze-G6q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-655" y="895"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3w3-aH-g97">
             <objects>
@@ -19,6 +53,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="KfB-37-12x" kind="relationship" relationship="viewControllers" id="cT8-zN-2Ga"/>
+                        <segue destination="ExR-0p-9qp" kind="relationship" relationship="viewControllers" id="KoN-Jp-kN1"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Hm-SJ-qcP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -83,6 +118,7 @@
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEh-Ut-KwB">
                                                     <rect key="frame" x="122.5" y="63" width="238.5" height="54"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="54" id="BnR-bI-dPL"/>
                                                     </constraints>
@@ -104,6 +140,7 @@
                                                 <constraint firstItem="wH9-ed-xCR" firstAttribute="leading" secondItem="9TF-8b-mhz" secondAttribute="trailing" constant="8" id="lJW-mk-uUL"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <gestureRecognizers/>
                                         <size key="customSize" width="369" height="125"/>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="yEh-Ut-KwB" id="pZt-YM-B4L"/>
@@ -128,11 +165,53 @@
                     <navigationItem key="navigationItem" id="OuP-im-sRb"/>
                     <connections>
                         <outlet property="collectionView" destination="Pq4-cP-qS7" id="Gfk-4P-tgg"/>
+                        <segue destination="Vmp-Sm-67Z" kind="show" identifier="ArticleWebViewVCSegue" id="tyS-LH-Iig"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-655.07246376811599" y="111.83035714285714"/>
         </scene>
+        <!--Article Web ViewVC-->
+        <scene sceneID="DhA-HJ-xpc">
+            <objects>
+                <viewController id="Vmp-Sm-67Z" customClass="ArticleWebViewVC" customModule="Personal_Project_1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yGI-Pb-Qya">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOY-ZR-UK2">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" video="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Ixk-Hd-nfP" firstAttribute="bottom" secondItem="eOY-ZR-UK2" secondAttribute="bottom" id="doq-Ts-fba"/>
+                            <constraint firstItem="eOY-ZR-UK2" firstAttribute="leading" secondItem="Ixk-Hd-nfP" secondAttribute="leading" id="fnl-f1-znw"/>
+                            <constraint firstItem="eOY-ZR-UK2" firstAttribute="top" secondItem="Ixk-Hd-nfP" secondAttribute="top" id="g29-if-BPF"/>
+                            <constraint firstItem="Ixk-Hd-nfP" firstAttribute="trailing" secondItem="eOY-ZR-UK2" secondAttribute="trailing" id="lkG-xz-U6k"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ixk-Hd-nfP"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="DEW-cI-Wm7">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="bookmark" catalog="system" id="Unb-tc-Zym"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="leftBarButtonItem" destination="Unb-tc-Zym" id="eqK-HR-0ge"/>
+                        <outlet property="webView" destination="eOY-ZR-UK2" id="0De-g2-FpT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kGE-FN-mQa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="454" y="112"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="bookmark" catalog="system" width="112" height="128"/>
+    </resources>
 </document>
