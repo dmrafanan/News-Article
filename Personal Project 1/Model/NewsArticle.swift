@@ -7,13 +7,17 @@
 //
 
 import Foundation
-struct Response:Codable {
-    var status:String?
-    var totalResults:Int?
+//class Response:Codable {
+//    var status:String?
+//    var totalResults:Int?
+//    var articles:[Article]?
+//}
+
+class Response:Codable{
     var articles:[Article]?
 }
 
-struct Article:Codable {
+class Article:Codable {
     var source:Source?
     var author:String?
     var title:String?
@@ -24,7 +28,7 @@ struct Article:Codable {
     var content:String?
 }
 
-struct Source:Codable {
+class Source:Codable {
     var id:String?
     var name:String?
 }
