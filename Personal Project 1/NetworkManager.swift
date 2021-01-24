@@ -7,45 +7,48 @@
 //
 
 import Foundation
+import CoreData
+import Alamofire
 
-struct NetworkManager{
+class NetworkManager{
     static let shared = NetworkManager()
-    let baseURL = "http://newsapi.org/v2/top-headlines?language=en&pageSize=100&apiKey=3e6efed2c0614492b40a7d7b716289b5"
+    let baseURL = "http://newsapi.org/v2/top-headlines?country=ph&pageSize=40&apiKey=3e6efed2c0614492b40a7d7b716289b5"
     
     private init() {}
     
-    func getArticles(completionHandler:@escaping (Result<[Article],GetArticlesError>) -> Void){
-        let endPoint = baseURL
+    var isFetching = false
+    func fetchArticles(withParameters parameters:String? = nil,completionHandler:@escaping (Result<[Article],GetArticlesError>) -> Void){
+        isFetching = true
+        var endPoint = baseURL
+        if let _ = parameters{
+            endPoint = "http://newsapi.org/v2/everything?pageSize=100\(parameters!)&apiKey=3e6efed2c0614492b40a7d7b716289b5"
+        }
         guard let url = URL(string: endPoint) else{
             completionHandler(.failure(.error))
             return
         }
-        
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let _ = error {
+        AF.request(url, method: .get).validate().responseData{ response in
+            switch response.result{
+            case .failure(_):
                 completionHandler(.failure(.error))
-                return
-            }
-            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                completionHandler(.failure(.error))
-                return
-            }
-            guard let data = data else {
-                completionHandler(.failure(.error))
-                return
+            case .success(let data):
+                DispatchQueue.main.async {
+                    do{
+                        let jsonObject = try JSONSerialization.jsonObject(with: data , options: []) as? [String:Any]
+                        let articlesFromJsonObject = jsonObject!["articles"]!
+                        let JSONOfArticlesOnly = try JSONSerialization.data(withJSONObject: articlesFromJsonObject, options: [])
+                        
+                        let articles = try! JSONDecoder().decode(Array<Article>.self, from: JSONOfArticlesOnly)
+                        completionHandler(.success(articles))
+                        self.isFetching = false
+                    }catch{
+                        completionHandler(.failure(.error))
+                        self.isFetching = false
+                    }
+                }
             }
             
-            
-            do{
-                let decoder = JSONDecoder()
-                let articles = try decoder.decode(Response.self, from: data)
-//                completionHandler(.success(articles))1
-            }catch{
-                completionHandler(.failure(.error))
-            }
         }
-        task.resume()
-
     }
 }
 

@@ -7,42 +7,103 @@
 //
 
 import UIKit
+import CoreData
 
-class BookmarkedArticlesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-
-    var bookmarkedArticles:[Article]!
-
-    @IBOutlet weak var collectionView: UICollectionView!{
+class BookmarkedArticlesVC: UIViewController, UITableViewDataSource, UITableViewDelegate,NewsArticleProtocol {
+    
+    var articles = [Article]()
+    
+    let container = (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let SQLStore = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.persistentStoreCoordinator.persistentStores.first{
+        $0.type == NSSQLiteStoreType
+    }!
+    
+    @IBOutlet weak var tableView: UITableView! {
         didSet{
-            collectionView.dataSource = self
-            collectionView.delegate = self
+            tableView.dataSource = self
+            tableView.delegate = self
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchArticlesFromPersistentStore()
+        tableView.reloadData()
+    }
+    
+    func fetchArticlesFromPersistentStore() {
+        let request:NSFetchRequest<Article> = Article.fetchRequest()
+        articles = try! context.fetch(request)
+    }
+    
+    
+    //MARK:UITableViewDataSource
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return articles.count
+    }
 
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let article = articles[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.newsArticleTableViewCell) as! NewsArticleTableViewCell
+        cell.configureCell(for: article)
+        return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+    
+    //MARK:UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if shouldPerformSegue(withIdentifier: Identifier.webViewSegue, sender: indexPath.row){
+            performSegue(withIdentifier: Identifier.webViewSegue, sender: indexPath.row)
+        }
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            context.delete(articles[indexPath.row])
+            articles.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            try? context.save()
+        }
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
-    }
-    
-
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if let index = sender as? Int,let urlString = articles[index].url, let _ = URL(string: urlString){
+            return true
+        }else{
+            context.delete(articles[sender as! Int])
+            try? context.save()
+            tableView.reloadData()
+        }
+        
+        return false
     }
-    */
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let webViewVC = segue.destination as? ArticleWebViewVC{
+            popWebViewVC(on: tabBarController!)
+            let index = sender as! Int
+            let urlString = articles[index].url!
+            let url = URL(string: urlString)
+            webViewVC.url = url
+            webViewVC.isBookmarked = true
+            webViewVC.updateBookmark = { [self] in
+                let article = getArticles(from: container,with: urlString)
+                if !article.isEmpty{
+                    context.delete(article.first!)
+                }else{
+                    articles[index].createCopy(on: container)
+                }
+                try? context.save()
+            }
+        }
+    }
 }

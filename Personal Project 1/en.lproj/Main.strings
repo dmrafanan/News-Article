@@ -1,0 +1,24 @@
+
+/* Class = "UIViewController"; title = "News"; ObjectID = "BYZ-38-t0r"; */
+"BYZ-38-t0r.title" = "News";
+
+/* Class = "UINavigationController"; title = "Bookmarks"; ObjectID = "ExR-0p-9qp"; */
+"ExR-0p-9qp.title" = "Bookmarks";
+
+/* Class = "UINavigationController"; title = "News"; ObjectID = "KfB-37-12x"; */
+"KfB-37-12x.title" = "News";
+
+/* Class = "UINavigationItem"; title = "News"; ObjectID = "OuP-im-sRb"; */
+"OuP-im-sRb.title" = "News";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "Unb-tc-Zym"; */
+"Unb-tc-Zym.title" = "Item";
+
+/* Class = "UINavigationItem"; title = "Bookmarks"; ObjectID = "WAL-nQ-4B6"; */
+"WAL-nQ-4B6.title" = "Bookmarks";
+
+/* Class = "UITabBarItem"; title = "Bookmarks"; ObjectID = "oIX-CL-Fs1"; */
+"oIX-CL-Fs1.title" = "Bookmarks";
+
+/* Class = "UITabBarItem"; title = "News"; ObjectID = "wez-g0-QDz"; */
+"wez-g0-QDz.title" = "News";

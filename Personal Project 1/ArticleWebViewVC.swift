@@ -16,15 +16,33 @@ class ArticleWebViewVC: UIViewController,WKNavigationDelegate {
     @IBOutlet weak var leftBarButtonItem: UIBarButtonItem!
     
     var url:URL!
+        
+    var isBookmarked:Bool!{
+        didSet{
+            if leftBarButtonItem != nil{
+                if isBookmarked{
+                    leftBarButtonItem.image = UIImage(systemName: "bookmark.fill")
+                }else{
+                    leftBarButtonItem.image = UIImage(systemName: "bookmark")
+                }
+            }
+        }
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        leftBarButtonItem.target = self
+    var updateBookmark: (()->Void)!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         webView.navigationDelegate = self
+        
         let urlRequest = URLRequest(url: url)
         webView.load(urlRequest)
-        
-        // Do any additional setup after loading the view.
+        leftBarButtonItem.target = self
+        leftBarButtonItem.action = #selector(bookmarkArticle)
     }
 
+    @objc func bookmarkArticle(){
+        isBookmarked = !isBookmarked
+        updateBookmark()
+    }
 }
