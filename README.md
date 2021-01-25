@@ -1,9 +1,9 @@
-# News Article
-## Bookmarks
-<img src="https://user-images.githubusercontent.com/60834223/105729972-c322b000-5f68-11eb-97cd-1bf6e172e31c.png" width = "200" />
+# News Article 
 
-## Night mode support
-<img src="https://user-images.githubusercontent.com/60834223/105694785-4b3e9080-5f3c-11eb-948f-7d13bab45301.png" width = "200" />
+#### A news viewing app
+
+## Bookmarks        Night mode support
+<img src="https://user-images.githubusercontent.com/60834223/105729972-c322b000-5f68-11eb-97cd-1bf6e172e31c.png" width = "200" hspace="30"  /> <img src="https://user-images.githubusercontent.com/60834223/105694785-4b3e9080-5f3c-11eb-948f-7d13bab45301.png" width = "200" /> Persistent using userdefaults
 
 Technical Overview:\
 Get request using Alamofire\
