@@ -1,4 +1,4 @@
-# News-Article
+# News Article
 
 Technical Overview:
 Alamofire to fetch articles
