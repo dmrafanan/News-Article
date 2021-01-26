@@ -41,13 +41,13 @@ class NewsArticleTableViewCell: UITableViewCell {
             let yearsElapsed = monthsElapsed/12
             //Hours
             if (hoursElapsed < 24){
-                if hoursElapsed == 0{
+                if hoursElapsed <= 1{
                     return "An hour ago"
                 }else{
                     return "\(hoursElapsed) hours ago"
                 }
                 //Days
-            }else if (daysElapsed < 30){
+            }else if (daysElapsed <= 31){
                 if ( daysElapsed == 1 ){
                     return "A day ago"
                 }else{

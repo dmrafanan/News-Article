@@ -16,7 +16,7 @@ class NewsArticlesVC: UIViewController,NewsArticleProtocol, UISearchControllerDe
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var articlesIsSearched = false
-        
+    
     private var articles = [Article]()
     
     @IBOutlet weak var tableView: UITableView!{
@@ -37,15 +37,19 @@ class NewsArticlesVC: UIViewController,NewsArticleProtocol, UISearchControllerDe
         //TODO: Exclude financial times?
         endSearchBarEditingWhenTouch()
         NetworkManager.shared.fetchArticles(){[self] result in
-            switch result{
-            case .success(let articlesFromResult):
-                articles.append(contentsOf: articlesFromResult)
-                DispatchQueue.main.async {
-                    tableView.reloadData()
-                }
-            case .failure(_):
-                handleNetworkingError()
+            addArticlesWith(result: result)
+        }
+    }
+    
+    func addArticlesWith(result:Result<[Article], GetArticlesError>){
+        switch result{
+        case .success(let articlesFromResult):
+            articles = articlesFromResult
+            DispatchQueue.main.async { [self] in
+                tableView.reloadData()
             }
+        case .failure(_):
+            handleNetworkingError()
         }
     }
     
@@ -104,7 +108,7 @@ class NewsArticlesVC: UIViewController,NewsArticleProtocol, UISearchControllerDe
         }
         return false
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let webViewVC = segue.destination as? ArticleWebViewVC{
@@ -120,7 +124,7 @@ class NewsArticlesVC: UIViewController,NewsArticleProtocol, UISearchControllerDe
             }else{
                 webViewVC.isBookmarked = true
             }
-
+            
             webViewVC.updateBookmark = {[self] in
                 let article = getArticles(from: container,with: urlString)
                 if !article.isEmpty{
@@ -165,28 +169,32 @@ extension NewsArticlesVC:UISearchBarDelegate{
         articlesIsSearched = true
         if searchBar.text!.count == 0{
             articlesIsSearched = false
-        }
-        let searchString = searchBar.text!.lowercased()
-        let parameter = "&q=\(searchString)"
-        articles = [Article]()
-        tableView.reloadData()
-        tableView.tableFooterView?.isHidden = false
-        if NetworkManager.shared.isFetching == false{
-            NetworkManager.shared.fetchArticles(withParameters: parameter){ [self]  result in
-                DispatchQueue.main.async {
-                    tableView.tableFooterView?.isHidden = true
-                }
-                switch result{
-                case .success(let moreArticles):
-                   articles = moreArticles
+            NetworkManager.shared.fetchArticles{[self] result in
+                self.addArticlesWith(result: result)
+            }
+        }else{
+            let searchString = searchBar.text!.lowercased()
+            let parameter = "&q=\(searchString)"
+            articles = [Article]()
+            tableView.reloadData()
+            tableView.tableFooterView?.isHidden = false
+            if NetworkManager.shared.isFetching == false{
+                NetworkManager.shared.fetchArticles(withParameters: parameter){ [self]  result in
                     DispatchQueue.main.async {
-                        tableView.reloadData()
+                        tableView.tableFooterView?.isHidden = true
                     }
-                case .failure(_):
-                   handleNetworkingError()
+                    switch result{
+                    case .success(let moreArticles):
+                        articles = moreArticles
+                        DispatchQueue.main.async {
+                            tableView.reloadData()
+                        }
+                    case .failure(_):
+                        handleNetworkingError()
+                    }
                 }
             }
+            searchBar.endEditing(true)
         }
-        searchBar.endEditing(true)
     }
 }

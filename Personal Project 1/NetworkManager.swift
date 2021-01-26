@@ -21,7 +21,7 @@ class NetworkManager{
         isFetching = true
         var endPoint = baseURL
         if let _ = parameters{
-            endPoint = "http://newsapi.org/v2/everything?pageSize=100\(parameters!)&apiKey=3e6efed2c0614492b40a7d7b716289b5"
+            endPoint = "http://newsapi.org/v2/everything?pageSize=100\(parameters!)&language=en&sortBy=publishedAt&apiKey=3e6efed2c0614492b40a7d7b716289b5"
         }
         guard let url = URL(string: endPoint) else{
             completionHandler(.failure(.error))
