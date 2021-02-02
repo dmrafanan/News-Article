@@ -13,4 +13,5 @@ Get request using Alamofire\
 JSON Decoding and Parsing using Codable protocol\
 Used newsapi.org as the article source\
 Core Data to save bookmarked articles\
-UserDefaults to save Dark mode preference
+UserDefaults to save Dark mode preference\
+API request to http://newsapi.org/ to get the news articles
