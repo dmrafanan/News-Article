@@ -14,4 +14,5 @@ Get request using Alamofire\
 JSON Decoding and Parsing using Codable protocol\
 Used newsapi.org as the article source\
 UserDefaults to save Dark mode preference\
+WKWebView to show the articles\
 API request to http://newsapi.org/ to get the news articles
